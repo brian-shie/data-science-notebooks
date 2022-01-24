@@ -109,3 +109,107 @@ One method that tries to **estimate** the conditional probabilities is *K-neares
 The algorithm estimates the conditional probabilities using the sample distribution of the $k$ nearest observations, and the uses it like the probabilities of the *Bayes Classifier*.
 
 As in the regression setting, the training and test errors are not strongly correlated. If we choose $k = 1$, thenour training error goes to zero, clearly showing a low bias and very high variance. So the level of flexibility is extremely important in the classification as well.
+
+## 2.4 Exercises
+### Conceptual
+**1. For each of parts (a) through (d), indicate whether we would generally
+expect the performance of a flexible statistical learning method to be
+better or worse than an inflexible method. Justify your answer.**
+
+(a) The sample size n is extremely large, and the number of predictors p is small.
+- Better. With more sample size overfitting will not be that much af a problem. As the number of predictors is small, there is likely a high bias involved (because it simplifies the real population function). A flexible model can lower the bias.
+
+(b) The number of predictors p is extremely large, and the number of observations n is small.
+- Worse. With a small number of observations the more flexible model is likely to overfit the training data.
+
+(c) The relationship between the predictors and response is highly non-linear.
+- Better. More flexible models can estimate more complex functions.
+
+(d) The variance of the error terms, i.e. σ2 = Var(ϵ), is extremely high.
+- Worse. A more flexible model in this case will learn the random patterns that comes with the high error variance.
+
+---
+
+
+**2. Explain whether each scenario is a classification or regression problem, and indicate whether we are most interested in inference or prediction. Finally, provide n and p.**
+
+(a) We collect a set of data on the top 500 firms in the US. For each firm we record profit, number of employees, industry and the CEO salary. We are interested in understanding which factors affect CEO salary.
+- Regression. We are interest in learning more about the relations within the variable of interest and it's predictors, meaning that we are most interested in inference. n = 500; p = 3.
+
+(b) We are considering launching a new product and wish to know whether it will be a success or a failure. We collect data on 20 similar products that were previously launched. For each product we have recorded whether it was a success or failure, price charged for the product, marketing budget, competition price, and ten other variables.
+- Classification (success or failure, two classes); prediction; n = 20; p = 13.
+
+(c) We are interested in predicting the % change in the USD/Euro exchange rate in relation to the weekly changes in the world stock markets. Hence we collect weekly data for all of 2012. For each week we record the % change in the USD/Euro, the % change in the US market, the % change in the British market, and the % change in the German market.
+- Regression; prediction; n = 52; p = 3.
+
+---
+
+**3. We now revisit the bias-variance decomposition.**
+
+(a) Provide a sketch of typical (squared) bias, variance, training error, test error, and Bayes (or irreducible) error curves, on a single plot, as we go from less flexible statistical learning methods towards more flexible approaches. The x-axis should represent the amount of flexibility in the method, and the y-axis should
+represent the values for each curve. There should be five curves. Make sure to label each one.
+
+(b) Explain why each of the five curves has the shape displayed in part (a).
+
+---
+
+**4. You will now think of some real-life applications for statistical learning.**
+
+(a) Describe three real-life applications in which classification might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.
+- **Predicting default from future borrowers.** Response: default or not; predictors: wage, age, past borrows, etc. Inference or prediction: we may want to only know if they are going to pay, or we could want to know its characteristics to learn which product to offer.
+- **Subscription renewal.** Response: renewal; predictors: features used. Inference: we could take action to implement more of the things the clients want more. This way, we could increase the renewal rate and increase profits.
+- **Spam emails.** Response: spam or not; predictors: language usage, domain sent, usage of upper case letters. Predictions: we only want to classify correctly the emails so they are automatically blocked.
+
+(b) Describe three real-life applications in which regression might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.
+- **Stock prices.** Stock price; market information; prediction: only need to know if it's going up or down.
+- **Wages.** Wages; human capital features; inference: need to know what should be the focus for improvement, for maximum wage gains.
+- **Predicting Inflation.** Inflation; market information about the items prices; prediction: need to know the inflation value so it is possible to create a more developed portfolio.
+
+(c) Describe three real-life applications in which cluster analysis might be useful.
+- **Personalized advertising.** More specific and engaging ads for the public.
+- **Insurance Pricing.** More precise pricing, more expensive for people that are more prone to use the insurance.
+- **Similar public on social media.** When you see more content that you like, it's likely that your engagement in the social media will increase, consequently increasing the SNS revenue.
+---
+
+**5. What are the advantages and disadvantages of a very flexible (versus a less flexible) approach for regression or classification? Under what circumstances might a more flexible approach be preferred to a less flexible approach? When might a less flexible approach be preferred?**
+
+- Advantages of a very flexible approach:
+    - Less bias: doesn't need to simplify too much the real function $f$;
+    - Can model complex functions;
+    - Can incorporate a high amount of features.
+
+- Advantages of a less flexible approach:
+    - Less variance: less prone to overfitting;
+    - Faster computation.
+
+- Disadvantages of a very flexible approach:
+    - High variance: can learn too much about the random patterns displayed on the training data;
+    - Needs more observations;
+    - More computational resources required.
+
+- Disadvantages of a less flexible approach:
+    - High bias: the error from simplifying the model is higher.
+    - Can't model complex functions;
+---
+
+**6. Describe the differences between a parametric and a non-parametric statistical learning approach. What are the advantages of a parametric approach to regression or classification (as opposed to a nonparametric approach)? What  are its disadvantages?**
+
+- A parametric approach is when estimating the function $\hat{f}(x) = y$, parameters are assumed. For example: in a linear regression approach, you simplify the estimation by assuming that $y$ is linear dependent on $x$. That means we could write 
+    - $y = \beta_0 \cdot x_0 + \beta_1 \cdot x_1 + \dots$ 
+- This means that our estimationg is easier (advantage). However, we may incur in high bias error as the real function $f$ may not be only made of linear components of $x$ (disadvantage). Consequently, non-parametric models will likely have higher variance and lower bias than parametric ones.
+---
+
+**7. The table below provides a training data set containing six observations, three predictors, and one qualitative response variable. Suppose we wish to use this data set to make a prediction for Y when X1 = X2 = X3 = 0 using K-nearest neighbors.**
+(a) Compute the Euclidean distance between each observation and the test point, X1 = X2 = X3 = 0.
+- $3$; $2$; $\sqrt{10}$; $\sqrt{5}$; $\sqrt{2}$; $\sqrt{3}$;
+
+(b) What is our prediction with K = 1? Why?
+- Green. Because the closest training observations is green (5th).
+
+(c) What is our prediction with K = 3? Why?
+- Red. Because the within the 3 closes training observations, there are two reds and one green.
+
+(d) If the Bayes decision boundary in this problem is highly nonlinear, then would we expect the best value for K to be large or small? Why?
+- Small. Because when K gets higher, the decision boundary of the algorithmn gets closer to a line. The same way, when K goes to lower values, the decision boundary gets more non-linear.
+
+
